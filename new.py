@@ -14,8 +14,8 @@ GITHUB_REPO = 'bioinf/edy'
 
 def get_issues(username, password, repo_name):
     stepik_repo = Github(username, password).get_repo(repo_name)
+    print(list(stepik_repo.get_milestones()))
     upcoming_milestone = stepik_repo.get_milestones()[0]
-
     return stepik_repo.get_issues(state='closed', milestone=upcoming_milestone)
 
 
@@ -44,3 +44,5 @@ for issue in closed_issues:
 
     if rn:
         output_file.write(rn)
+    else:
+        print('Skip pr:', issue.pull_request.html_url, issue.body)
